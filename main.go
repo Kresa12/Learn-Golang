@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"tesGoInIntellij/latihan/pengambilandata"
+	"tesGoInIntellij/latihan"
 )
 
 type Eksporter interface {
@@ -48,17 +48,23 @@ func jalankanEksport(dataLaporan string, eksportir Eksporter) {
 
 func main() {
 
-	order1 := pengambilandata.Order{"1", 300, "bagas@gmail.com"}
-	procCreditCard := &pengambilandata.CreditCardProcessor{}
-	notifEmail := &pengambilandata.EmailNotifier{}
-	layananOrder1 := pengambilandata.NewOrderService(procCreditCard, notifEmail)
+	order1 := latihan.Order{Id: "1", Amount: 300, EmailUser: "bagas@gmail.com"}
+	procCreditCard := &latihan.CreditCardProcessor{}
+	notifEmail := &latihan.EmailNotifier{}
+	layananOrder1 := latihan.NewOrderService(procCreditCard, notifEmail)
 	layananOrder1.OrderProces(&order1)
 
-	order2 := pengambilandata.Order{"2", 200, "fikal@gmail.com"}
-	procbank := &pengambilandata.BankTransferProcessor{}
-	notifEmail = &pengambilandata.EmailNotifier{}
-	layananOrder2 := pengambilandata.NewOrderService(procbank, notifEmail)
+	order2 := latihan.Order{Id: "2", Amount: 200, EmailUser: "fikal@gmail.com"}
+	procbank := &latihan.BankTransferProcessor{}
+	notifEmail = &latihan.EmailNotifier{}
+	layananOrder2 := latihan.NewOrderService(procbank, notifEmail)
 	layananOrder2.OrderProces(&order2)
+
+	order3 := latihan.Order{Id: "3", Amount: 150, EmailUser: "panji@gmail.com"}
+	procbank = &latihan.BankTransferProcessor{}
+	notifWhatsApp := &latihan.WhatsAppNotifier{}
+	layananOrder3 := latihan.NewOrderService(procbank, notifWhatsApp)
+	layananOrder3.OrderProces(&order3)
 
 	//db := pengambilandata.NewDatabaseStore()
 	//db.Data["1"] = "Andi"

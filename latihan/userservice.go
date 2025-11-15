@@ -1,4 +1,4 @@
-package pengambilandata
+package latihan
 
 import "fmt"
 

@@ -1,4 +1,4 @@
-package pengambilandata
+package latihan
 
 type Order struct {
 	Id        string
