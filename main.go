@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"tesGoInIntellij/latihan"
+	"tesGoInIntellij/latihan2"
 )
 
 type Eksporter interface {
@@ -48,23 +48,45 @@ func jalankanEksport(dataLaporan string, eksportir Eksporter) {
 
 func main() {
 
-	order1 := latihan.Order{Id: "1", Amount: 300, EmailUser: "bagas@gmail.com"}
-	procCreditCard := &latihan.CreditCardProcessor{}
-	notifEmail := &latihan.EmailNotifier{}
-	layananOrder1 := latihan.NewOrderService(procCreditCard, notifEmail)
-	layananOrder1.OrderProces(&order1)
+	//pengguna1 := latihan2.Pengguna{"fikal@gmail.com", "12345678"}
+	//validasiEmail := latihan2.AturanEmailHarusValid{}
+	//layananreg1 := latihan2.NewServicePengguna(&validasiEmail)
+	//layananreg1.LayananRegristrasi(&pengguna1)
+	//
+	//pengguna2 := latihan2.Pengguna{"", "12345678"}
+	//validasiTidakBolehKosong := latihan2.AturanEmailTidakKosong{}
+	//layananreg2 := latihan2.NewServicePengguna(&validasiTidakBolehKosong)
+	//layananreg2.LayananRegristrasi(&pengguna2)
 
-	order2 := latihan.Order{Id: "2", Amount: 200, EmailUser: "fikal@gmail.com"}
-	procbank := &latihan.BankTransferProcessor{}
-	notifEmail = &latihan.EmailNotifier{}
-	layananOrder2 := latihan.NewOrderService(procbank, notifEmail)
-	layananOrder2.OrderProces(&order2)
+	user := &latihan2.Pengguna{
+		Email:    "bagas@gmail.com",
+		Password: "12345678",
+	}
+	aturan1 := &latihan2.AturanEmailTidakKosong{}
+	aturan2 := &latihan2.AturanEmailHarusValid{}
 
-	order3 := latihan.Order{Id: "3", Amount: 150, EmailUser: "panji@gmail.com"}
-	procbank = &latihan.BankTransferProcessor{}
-	notifWhatsApp := &latihan.WhatsAppNotifier{}
-	layananOrder3 := latihan.NewOrderService(procbank, notifWhatsApp)
-	layananOrder3.OrderProces(&order3)
+	aturan3 := &latihan2.AturanPasswordMinimal{}
+	kumpulanAturan := []latihan2.AturanValidasi{aturan1, aturan2, aturan3}
+	service := latihan2.NewServicePengguna(kumpulanAturan)
+	service.LayananRegristrasi(user)
+
+	//order1 := latihan.Order{Id: "1", Amount: 300, EmailUser: "bagas@gmail.com"}
+	//procCreditCard := &latihan.CreditCardProcessor{}
+	//notifEmail := &latihan.EmailNotifier{}
+	//layananOrder1 := latihan.NewOrderService(procCreditCard, notifEmail)
+	//layananOrder1.OrderProces(&order1)
+	//
+	//order2 := latihan.Order{Id: "2", Amount: 200, EmailUser: "fikal@gmail.com"}
+	//procbank := &latihan.BankTransferProcessor{}
+	//notifEmail = &latihan.EmailNotifier{}
+	//layananOrder2 := latihan.NewOrderService(procbank, notifEmail)
+	//layananOrder2.OrderProces(&order2)
+	//
+	//order3 := latihan.Order{Id: "3", Amount: 150, EmailUser: "panji@gmail.com"}
+	//procbank = &latihan.BankTransferProcessor{}
+	//notifWhatsApp := &latihan.WhatsAppNotifier{}
+	//layananOrder3 := latihan.NewOrderService(procbank, notifWhatsApp)
+	//layananOrder3.OrderProces(&order3)
 
 	//db := pengambilandata.NewDatabaseStore()
 	//db.Data["1"] = "Andi"
