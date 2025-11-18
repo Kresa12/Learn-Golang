@@ -8,33 +8,34 @@ type Todo struct {
 	Status bool
 }
 
-var todoList = []*Todo{
+var TodoList = []*Todo{
 	{0, "Makan", false},
 	{1, "mandi", false},
 	{2, "berangkat", false},
 }
 var id = 3
 
-func AddTodo(task string) {
+func NewAddTodo(task string) *Todo {
 	newTodo := &Todo{
 		Id:     id,
 		Task:   task,
 		Status: false,
 	}
 	id++
-	todoList = append(todoList, newTodo)
+	TodoList = append(TodoList, newTodo)
+	return newTodo
 }
 
 func (t *Todo) GetAllTodo() []*Todo {
-	if len(todoList) == 0 {
+	if len(TodoList) == 0 {
 		fmt.Println("Tidak ada data")
 		return nil
 	}
-	return todoList
+	return TodoList
 }
 
 func (t *Todo) GetTodoById(id int) *Todo {
-	for _, t := range todoList {
+	for _, t := range TodoList {
 		if id == t.Id {
 			return t
 		}
@@ -43,9 +44,9 @@ func (t *Todo) GetTodoById(id int) *Todo {
 }
 
 func (t *Todo) Delete(id int) error {
-	for i, t := range todoList {
+	for i, t := range TodoList {
 		if id == t.Id {
-			todoList = append(todoList[:i], todoList[i+1:]...)
+			TodoList = append(TodoList[:i], TodoList[i+1:]...)
 		}
 	}
 
